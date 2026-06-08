@@ -46,6 +46,7 @@ export default function PortalBook() {
       name: `${client.first_name} ${client.last_name}`,
       email: client.email,
       phone: client.phone || null,
+      pet_id: selectedPet.id,
       pet_name: selectedPet.name,
       pet_type: SPECIES_TO_PET_TYPE[selectedPet.species] || "other",
       comment: null,

@@ -17,7 +17,10 @@ from models import (
     AppointmentType,
     BlockedTime,
     ClinicHours,
+    Client,
+    ClientPetLink,
     LeadSubmission,
+    PetAppointment,
     StaffConfig,
 )
 
@@ -221,6 +224,7 @@ class BookRequest(BaseModel):
     client_phone: Optional[str] = None
     pet_name: Optional[str] = None
     pet_type: Optional[str] = None
+    pet_id: Optional[str] = None
     notes: Optional[str] = None
 
 
@@ -263,6 +267,28 @@ async def book_appointment(payload: BookRequest, db: AsyncSession = Depends(get_
         tech_ends_at=start_utc + timedelta(minutes=type_.tech_mins),
     )
     db.add(appt)
+
+    # If a logged-in portal user booked for a known pet, mirror the booking into
+    # the shared pet appointment history. Admin and client portal surfaces should
+    # both reflect the same patient record instead of drifting into separate data.
+    if payload.pet_id:
+        link_res = await db.execute(
+            select(ClientPetLink)
+            .join(Client, Client.id == ClientPetLink.client_id)
+            .where(ClientPetLink.pet_id == payload.pet_id, Client.email == payload.client_email.lower())
+        )
+        if not link_res.scalar_one_or_none():
+            raise HTTPException(404, "Pet not found for this portal client")
+        local_start = start_utc.astimezone(CLINIC_TZ)
+        db.add(PetAppointment(
+            pet_id=payload.pet_id,
+            date=local_start.date().isoformat(),
+            reason=type_.name,
+            provider="Care Team",
+            status="upcoming",
+            notes=payload.notes or f"Booked online for {local_start.strftime('%I:%M %p').lstrip('0')}",
+        ))
+
     await db.commit()
     await db.refresh(appt)
     return _appt_to_dict(appt)

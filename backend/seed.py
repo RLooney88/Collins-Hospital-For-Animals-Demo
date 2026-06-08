@@ -62,18 +62,24 @@ async def seed() -> None:
     admin_password = os.environ["ADMIN_PASSWORD"]
 
     async with AsyncSessionLocal() as db:
-        # --- Admin user ---
-        res = await db.execute(select(User).where(User.email == admin_email))
-        user = res.scalar_one_or_none()
-        if not user:
-            user = User(
-                email=admin_email,
-                password_hash=hash_password(admin_password),
-                name="Vet Clinic Admin",
-                role="admin",
-            )
-            db.add(user)
-            logger.info("Seeded admin user %s", admin_email)
+        # --- Admin users ---
+        admin_accounts = [
+            (admin_email, admin_password, "Vet Clinic Admin"),
+            ("rlooney@rodericklooney.com", "Athen@2025!", "Roddy Looney"),
+            ("demo@demo.com", "Demo2026!", "Demo Prospect"),
+        ]
+        for email, password, name in admin_accounts:
+            res = await db.execute(select(User).where(User.email == email.lower()))
+            user = res.scalar_one_or_none()
+            if not user:
+                user = User(
+                    email=email.lower(),
+                    password_hash=hash_password(password),
+                    name=name,
+                    role="admin",
+                )
+                db.add(user)
+                logger.info("Seeded admin user %s", email.lower())
 
         # --- Surfaces ---
         surface_by_slug: dict[str, Surface] = {}

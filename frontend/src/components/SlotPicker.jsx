@@ -89,6 +89,7 @@ export default function SlotPicker({ leadId, lead, preferredType, onBooked }) {
         client_name: lead?.name || "Guest",
         client_email: lead?.email || "",
         client_phone: lead?.phone || null,
+        pet_id: lead?.pet_id || null,
         pet_name: lead?.pet_name || null,
         pet_type: lead?.pet_type || null,
         notes: lead?.comment || null,
