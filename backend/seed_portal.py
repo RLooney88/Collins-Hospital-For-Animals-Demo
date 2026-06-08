@@ -10,8 +10,6 @@ import asyncio
 import logging
 
 from sqlalchemy import select
-from sqlalchemy.orm import selectinload
-
 from auth import hash_password
 from database import AsyncSessionLocal
 from models import Client, Pet, ClientPetLink, PetContact, PetHealthRecord, PetAppointment
@@ -74,11 +72,7 @@ APPOINTMENTS = [
 
 async def _ensure_client_with_pet(db, spec: dict) -> None:
     email = spec["email"].lower()
-    res = await db.execute(
-        select(Client)
-        .where(Client.email == email)
-        .options(selectinload(Client.pet_links).selectinload(ClientPetLink.pet))
-    )
+    res = await db.execute(select(Client).where(Client.email == email))
     client = res.scalar_one_or_none()
     if not client:
         client = Client(
@@ -99,11 +93,12 @@ async def _ensure_client_with_pet(db, spec: dict) -> None:
         client.password_hash = hash_password(spec["password"])
 
     pet_spec = spec["pet"]
-    existing_pet = None
-    for link in client.pet_links:
-        if link.pet and link.pet.name.lower() == pet_spec["name"].lower():
-            existing_pet = link.pet
-            break
+    pet_res = await db.execute(
+        select(Pet)
+        .join(ClientPetLink, ClientPetLink.pet_id == Pet.id)
+        .where(ClientPetLink.client_id == client.id, Pet.name == pet_spec["name"])
+    )
+    existing_pet = pet_res.scalar_one_or_none()
     if not existing_pet:
         existing_pet = Pet(**pet_spec)
         db.add(existing_pet)
