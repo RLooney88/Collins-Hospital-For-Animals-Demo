@@ -9,15 +9,15 @@
       "page": "home",
       "description": "Main hero on the homepage, swaps copy + image per intent.",
       "default_content": {
-        "eyebrow": "Trusted Care for Every Paw",
-        "headline": "Compassionate veterinary care for your whole family.",
-        "subheadline": "Veterinary Practice Name has been caring for Your City pets for years, wellness, surgery, dental, emergencies, and beyond.",
+        "eyebrow": "Celebrating Over 100 Years Caring for Pets",
+        "headline": "Historic Georgetown veterinary care for dogs, cats, and select exotic pets.",
+        "subheadline": "Collins Hospital for Animals has served Washington, DC pets since 1917 with medicine, surgery, dentistry, diagnostics, boarding, and thoughtful client education.",
         "primary_cta_label": "Schedule a Visit",
         "primary_cta_href": "/appointment",
-        "secondary_cta_label": "Call (000) 000-0000",
-        "secondary_cta_href": "tel:+10000000000",
+        "secondary_cta_label": "Call (202) 659-8830",
+        "secondary_cta_href": "tel:+12026598830",
         "image_url": "/images/animals/hero-home-default.webp",
-        "badge": "Family-owned clinic in Your City, ST"
+        "badge": "By appointment in Washington, DC"
       },
       "switches": [
         {
@@ -27,19 +27,19 @@
           },
           "priority": 100,
           "content": {
-            "eyebrow": "Caring for Your City Dogs",
+            "eyebrow": "Caring for Washington Dogs",
             "headline": "Tails wag when you walk in the door.",
             "subheadline": "From first-puppy visits to senior care, we treat every dog like family.",
             "primary_cta_label": "Book a Dog Visit",
             "primary_cta_href": "/appointment",
-            "secondary_cta_label": "Call (000) 000-0000",
-            "secondary_cta_href": "tel:+10000000000",
+            "secondary_cta_label": "Call (202) 659-8830",
+            "secondary_cta_href": "tel:+12026598830",
             "image_url": "/images/animals/hero-dogs-default.webp",
-            "badge": "Family-owned clinic in Your City, ST"
+            "badge": "Family-owned clinic in Washington, DC"
           }
         },
         {
-          "name": "Dogs → New Puppy",
+          "name": "Dogs \u2192 New Puppy",
           "rule": {
             "intent": "dogs",
             "sub_intent": "new_puppy"
@@ -51,14 +51,14 @@
             "subheadline": "Vaccine schedules, spay/neuter timing and early preventive care, all in one friendly visit.",
             "primary_cta_label": "Book Puppy's First Visit",
             "primary_cta_href": "/appointment",
-            "secondary_cta_label": "Call (000) 000-0000",
-            "secondary_cta_href": "tel:+10000000000",
+            "secondary_cta_label": "Call (202) 659-8830",
+            "secondary_cta_href": "tel:+12026598830",
             "image_url": "/images/animals/puppy-hero-switch.webp",
-            "badge": "Family-owned clinic in Your City, ST"
+            "badge": "Family-owned clinic in Washington, DC"
           }
         },
         {
-          "name": "Dogs → Senior Care",
+          "name": "Dogs \u2192 Senior Care",
           "rule": {
             "intent": "dogs",
             "sub_intent": "senior"
@@ -70,10 +70,10 @@
             "subheadline": "Laser therapy, arthritis support, and chronic-condition monitoring for older dogs.",
             "primary_cta_label": "Senior Wellness Consult",
             "primary_cta_href": "/appointment",
-            "secondary_cta_label": "Call (000) 000-0000",
-            "secondary_cta_href": "tel:+10000000000",
+            "secondary_cta_label": "Call (202) 659-8830",
+            "secondary_cta_href": "tel:+12026598830",
             "image_url": "/images/animals/hero-dogs-senior.webp",
-            "badge": "Family-owned clinic in Your City, ST"
+            "badge": "Family-owned clinic in Washington, DC"
           }
         },
         {
@@ -88,14 +88,14 @@
             "subheadline": "We go slow, we listen, and we put comfort first.",
             "primary_cta_label": "Book a Cat Visit",
             "primary_cta_href": "/appointment",
-            "secondary_cta_label": "Call (000) 000-0000",
-            "secondary_cta_href": "tel:+10000000000",
+            "secondary_cta_label": "Call (202) 659-8830",
+            "secondary_cta_href": "tel:+12026598830",
             "image_url": "/images/animals/cat-hero-home.webp",
-            "badge": "Family-owned clinic in Your City, ST"
+            "badge": "Family-owned clinic in Washington, DC"
           }
         },
         {
-          "name": "Cats → New Kitten",
+          "name": "Cats \u2192 New Kitten",
           "rule": {
             "intent": "cats",
             "sub_intent": "new_kitten"
@@ -107,10 +107,10 @@
             "subheadline": "Kitten vaccines, spay/neuter timing, and gentle first visits.",
             "primary_cta_label": "Book Kitten's First Visit",
             "primary_cta_href": "/appointment",
-            "secondary_cta_label": "Call (000) 000-0000",
-            "secondary_cta_href": "tel:+10000000000",
+            "secondary_cta_label": "Call (202) 659-8830",
+            "secondary_cta_href": "tel:+12026598830",
             "image_url": "/images/animals/hero-cats-kitten.webp",
-            "badge": "Family-owned clinic in Your City, ST"
+            "badge": "Family-owned clinic in Washington, DC"
           }
         },
         {
@@ -125,10 +125,10 @@
             "subheadline": "Let's talk about your pet and see if we're the right fit for their needs.",
             "primary_cta_label": "Contact the Clinic",
             "primary_cta_href": "/appointment",
-            "secondary_cta_label": "Call (000) 000-0000",
-            "secondary_cta_href": "tel:+10000000000",
+            "secondary_cta_label": "Call (202) 659-8830",
+            "secondary_cta_href": "tel:+12026598830",
             "image_url": "/images/animals/hero-critters-page.webp",
-            "badge": "Family-owned clinic in Your City, ST"
+            "badge": "Family-owned clinic in Washington, DC"
           }
         },
         {
@@ -143,10 +143,10 @@
             "subheadline": "Describe what's going on and we'll guide you to the next best step, today.",
             "primary_cta_label": "Request an Urgent Visit",
             "primary_cta_href": "/appointment",
-            "secondary_cta_label": "Call (000) 000-0000",
-            "secondary_cta_href": "tel:+10000000000",
+            "secondary_cta_label": "Call (202) 659-8830",
+            "secondary_cta_href": "tel:+12026598830",
             "image_url": "/images/animals/hero-home-default.webp",
-            "badge": "Family-owned clinic in Your City, ST"
+            "badge": "Family-owned clinic in Washington, DC"
           }
         }
       ]
@@ -536,7 +536,7 @@
       "page": "home",
       "description": "Testimonials emphasised by intent.",
       "default_content": {
-        "heading": "Families across Your City trust us with their pets.",
+        "heading": "Families across Washington trust us with their pets.",
         "testimonials": [
           {
             "quote": "the veterinarian's love, knowledge and respect for animals is unparalleled. She does not waste your money on unnecessary tests yet does everything she can to find the problem and get your pet healthy.",
@@ -544,7 +544,7 @@
             "tag": "Wellness"
           },
           {
-            "quote": "If I could give Veterinary Practice Name more stars, I would! From their receptionists to techs to doctors, they are all kind, attentive, understanding and knowledgeable.",
+            "quote": "If I could give Collins Hospital for Animals more stars, I would! From their receptionists to techs to doctors, they are all kind, attentive, understanding and knowledgeable.",
             "author": "First-time dog owner",
             "tag": "New Puppy"
           },
@@ -553,7 +553,12 @@
             "author": "Beagle mom",
             "tag": "Surgery"
           }
-        ]
+        ],
+        "eyebrow": "A DC veterinary landmark",
+        "headline": "Trusted veterinary care since 1917.",
+        "quote": "Collins Hospital for Animals provides high quality medicine and surgery in a caring and compassionate environment for pets and their people.",
+        "author": "Collins Hospital for Animals",
+        "source": "Practice website"
       },
       "switches": [
         {
@@ -590,7 +595,7 @@
         "items": [
           {
             "q": "My new puppy needs vaccines, how soon should we come in?",
-            "a": "As early as 6–8 weeks for the first puppy visit. We'll design a vaccine schedule based on your puppy's age and lifestyle and talk through spay/neuter timing, house-training, and nutrition.",
+            "a": "As early as 6\u20138 weeks for the first puppy visit. We'll design a vaccine schedule based on your puppy's age and lifestyle and talk through spay/neuter timing, house-training, and nutrition.",
             "intent": "dogs",
             "sub_intent": "new_puppy"
           },
@@ -657,7 +662,7 @@
         "eyebrow": "Request a visit",
         "headline": "Let's get your pet on the schedule.",
         "subheadline": "Tell us a little about your pet and we'll follow up to confirm a time that works.",
-        "reassurance": "Same-week appointments typical. For urgent concerns, please call (000) 000-0000."
+        "reassurance": "Same-week appointments typical. For urgent concerns, please call (202) 659-8830."
       },
       "switches": [
         {
@@ -670,7 +675,7 @@
             "eyebrow": "Request a dog visit",
             "headline": "Let's get your dog on the schedule.",
             "subheadline": "A few quick details and we'll follow up to confirm.",
-            "reassurance": "Same-week appointments typical. For urgent concerns, please call (000) 000-0000."
+            "reassurance": "Same-week appointments typical. For urgent concerns, please call (202) 659-8830."
           }
         },
         {
@@ -683,7 +688,7 @@
             "eyebrow": "Request a cat visit",
             "headline": "Let's get your cat in for a gentle visit.",
             "subheadline": "Tell us a bit about your kitty and we'll take it from there.",
-            "reassurance": "Same-week appointments typical. For urgent concerns, please call (000) 000-0000."
+            "reassurance": "Same-week appointments typical. For urgent concerns, please call (202) 659-8830."
           }
         },
         {
@@ -709,7 +714,7 @@
             "eyebrow": "We're here to help",
             "headline": "Tell us what's going on.",
             "subheadline": "Describe symptoms and timing, we'll reach out quickly to guide you.",
-            "reassurance": "If this is truly urgent, please call (000) 000-0000 right now."
+            "reassurance": "If this is truly urgent, please call (202) 659-8830 right now."
           }
         }
       ]
@@ -720,10 +725,10 @@
       "page": "service",
       "description": "Inline CTA block shown on service/condition pages.",
       "default_content": {
-        "headline": "Ready when you are.",
-        "body": "Tell us about your pet and we'll take it from here.",
-        "primary_cta_label": "Request an appointment",
-        "primary_cta_href": "/appointment",
+        "headline": "Need an appointment at Collins?",
+        "body": "Appointments are scheduled Monday through Friday by phone. Call the receptionist team and they will help match your pet with the right visit type.",
+        "primary_cta_label": "Call (202) 659-8830",
+        "primary_cta_href": "tel:+12026598830",
         "image_url": "/images/animals/hero-svc-default.webp",
         "imagePosition": "center 45%"
       },

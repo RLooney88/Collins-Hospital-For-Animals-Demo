@@ -11,8 +11,8 @@ if not BASE_URL:
     raise ValueError("REACT_APP_BACKEND_URL environment variable is required")
 
 # Test credentials from test_credentials.md
-ADMIN_EMAIL = "admin@example-vet-site.com"
-ADMIN_PASSWORD = "Your CityVet2026!"
+ADMIN_EMAIL = "admin@cha.rclintegrated.com"
+ADMIN_PASSWORD = "WashingtonVet2026!"
 
 
 @pytest.fixture(scope="module")

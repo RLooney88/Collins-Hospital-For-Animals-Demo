@@ -16,7 +16,7 @@ from sqlalchemy import select
 
 from auth import hash_password
 from database import AsyncSessionLocal, Base, engine
-from models import Surface, Switch, User
+from models import Surface, Switch, User, AppointmentType, ClinicHours, StaffConfig
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +64,7 @@ async def seed() -> None:
     async with AsyncSessionLocal() as db:
         # --- Admin users ---
         admin_accounts = [
-            (admin_email, admin_password, "Vet Clinic Admin"),
+            (admin_email, admin_password, "Collins Admin"),
             ("rlooney@rodericklooney.com", "Athen@2025!", "Roddy Looney"),
             ("demo@demo.com", "Demo2026!", "Demo Prospect"),
         ]
@@ -140,6 +140,39 @@ async def seed() -> None:
 
                 switch = Switch(surface_id=surface.id, **sw_spec)
                 db.add(switch)
+
+
+        # --- Collins booking configuration ---
+        booking_types = [
+            ("Wellness Exam", "Full-service appointment for healthy pets, annual care, vaccines, and prevention.", 45, 30, 45, "#A98243", 10),
+            ("Sick or Urgent Visit", "Same-day or work-in request for illness, injury, or urgent concerns during normal hours when available.", 45, 30, 45, "#111111", 20),
+            ("Technician Appointment", "Routine services such as nail trims, anal glands, or subcutaneous fluids when a doctor is not required.", 20, 0, 20, "#6E552F", 30),
+            ("Dental Consultation", "Dental evaluation, cleaning planning, or rabbit and rodent dental discussion.", 45, 30, 45, "#8A6A3A", 40),
+            ("Exotic Pet Exam", "Rabbit, guinea pig, small rodent, bird, or reptile exam, specific veterinarians only, call to confirm.", 45, 30, 45, "#A98243", 50),
+        ]
+        for name, desc, duration, doctor_mins, tech_mins, color, order in booking_types:
+            res = await db.execute(select(AppointmentType).where(AppointmentType.name == name))
+            appt = res.scalar_one_or_none()
+            if not appt:
+                db.add(AppointmentType(name=name, description=desc, duration_mins=duration, doctor_mins=doctor_mins, tech_mins=tech_mins, color=color, sort_order=order, active=True))
+            else:
+                appt.description = desc; appt.duration_mins = duration; appt.doctor_mins = doctor_mins; appt.tech_mins = tech_mins; appt.color = color; appt.sort_order = order; appt.active = True
+
+        hours = {0:(True,480,1140),1:(True,480,1140),2:(True,540,900),3:(True,480,1140),4:(True,480,1140),5:(False,0,0),6:(False,0,0)}
+        for day,(is_open,open_mins,close_mins) in hours.items():
+            res = await db.execute(select(ClinicHours).where(ClinicHours.day_of_week == day))
+            row = res.scalar_one_or_none()
+            if not row:
+                db.add(ClinicHours(day_of_week=day, is_open=is_open, open_minutes=open_mins, close_minutes=close_mins))
+            else:
+                row.is_open=is_open; row.open_minutes=open_mins; row.close_minutes=close_mins
+
+        res = await db.execute(select(StaffConfig).limit(1))
+        staff_cfg = res.scalar_one_or_none()
+        if not staff_cfg:
+            db.add(StaffConfig(num_doctors=2, num_techs=3, slot_granularity_mins=30, booking_window_days=21, min_lead_time_hours=4))
+        else:
+            staff_cfg.num_doctors=2; staff_cfg.num_techs=3; staff_cfg.slot_granularity_mins=30; staff_cfg.booking_window_days=21; staff_cfg.min_lead_time_hours=4
 
         await db.commit()
         logger.info("Seed complete from %s (refresh_existing=%s).", SEED_PATH, refresh_existing)

@@ -55,13 +55,13 @@ const ANIMALS = {
     title: "Dogs",
     noun: "dog",
     hero_headline: "Care that keeps their tail wagging.",
-    hero_eyebrow: "Your City Dogs",
+    hero_eyebrow: "DC Dogs",
     hero_copy:
       "From first-puppy visits to senior comfort, we treat every dog with the calm, thoughtful care you'd give a member of the family.",
     image: "/images/animals/hero-dogs-page.webp",
     quote: {
       body: "Dogs don't hide discomfort as well as cats do, but they'll push through because they want to please you. Our job is to notice the small things, a little stiffness, a subtle cough, a change in appetite, before they become big problems.",
-      author: "Dr. Veterinarian Name, DVM",
+      author: "Dr. Kristen Fischer, V.M.D.",
     },
     life_stages: [
       { name: "Puppy", age: "6 wks – 1 yr", focus: "Vaccine series, deworming, nutrition counseling, spay/neuter planning, training guidance.", icon: "paw", image: "/images/animals/dog-puppy.webp" },
@@ -88,7 +88,7 @@ const ANIMALS = {
     faqs: [
       { q: "How often should my adult dog come in?", a: "Once a year for healthy adults (1–7 yrs), twice a year for seniors. Puppies follow their own schedule for the first year." },
       { q: "When should I spay/neuter my dog?", a: "It depends on breed and size, small breeds often earlier, large and giant breeds later to support joint development. We'll recommend the right timing at your puppy visit." },
-      { q: "What signs mean I should call you today?", a: "Not eating for 24 hours, repeated vomiting, difficulty breathing, suspected toxin ingestion, sudden lameness, seizures, or any bloated belly. Call (000) 000-0000." },
+      { q: "What signs mean I should call you today?", a: "Not eating for 24 hours, repeated vomiting, difficulty breathing, suspected toxin ingestion, sudden lameness, seizures, or any bloated belly. Call (202) 659-8830 first so the team can guide you appropriately." },
       { q: "Do you do dental work for dogs?", a: "Yes, full anesthetic cleanings with dental X-rays and extractions as needed. We screen at every wellness visit." },
       { q: "Can you help my senior dog stay comfortable?", a: "Absolutely. Laser therapy, joint support, weight management, multimodal pain control, and PRP/regenerative options, we combine them for real quality of life." },
     ],
@@ -99,13 +99,13 @@ const ANIMALS = {
     title: "Cats",
     noun: "cat",
     hero_headline: "Gentle, low-stress feline medicine.",
-    hero_eyebrow: "Your City Cats",
+    hero_eyebrow: "DC Cats",
     hero_copy:
       "We take cats at their pace, quiet rooms, slow hands, and a team that listens. Feline wellness, dental, senior, and specific treatments all in one place.",
     image: "/images/animals/cat-hero-home.webp",
     quote: {
       body: "Cats don't complain, they hide. The best thing you can do is bring them in for wellness before they're sick, because by the time a cat looks sick, the disease has usually been there a while.",
-      author: "Dr. Veterinarian Name, DVM",
+      author: "Dr. Kristen Fischer, V.M.D.",
     },
     life_stages: [
       { name: "Kitten", age: "8 wks – 1 yr", focus: "Vaccine series, deworming, spay/neuter, nutrition, socialization, microchipping.", icon: "paw", image: "/images/animals/cat-kitten.webp" },
@@ -149,7 +149,7 @@ const ANIMALS = {
     image: "/images/animals/hero-critters-page.webp",
     quote: {
       body: "The best thing we can do for an exotic pet is be honest: what we can confidently treat, and when a species-specific specialist is the right next step. We will point you in the right direction either way.",
-      author: "Dr. Veterinarian Name, DVM",
+      author: "Dr. Kristen Fischer, V.M.D.",
     },
     life_stages: [
       { name: "Young", age: "First months", focus: "Husbandry review, diet, environment, basic exam, age-appropriate handling.", icon: "paw", image: "/images/animals/rabbit-young.webp" },
@@ -176,7 +176,7 @@ const ANIMALS = {
     faqs: [
       { q: "Do you see rabbits?", a: "Yes, for wellness and common issues. Please call first so we can confirm fit and timing." },
       { q: "What about reptiles, birds, or very exotic species?", a: "We see some. For specialty cases we will refer you to an experienced exotics practice rather than guess." },
-      { q: "My rabbit stopped eating, is that urgent?", a: "Yes. GI stasis is life-threatening in rabbits. Call (000) 000-0000 immediately or head to an exotics ER." },
+      { q: "My rabbit stopped eating, is that urgent?", a: "Yes. GI stasis is life-threatening in rabbits. Call (202) 659-8830 immediately or call Collins immediately or contact an exotics emergency hospital." },
       { q: "How often should my small mammal come in?", a: "At minimum once a year for a wellness and husbandry review. Seniors and sick pets more often." },
       { q: "Can you help me set up a good habitat?", a: "Absolutely. Environment, lighting, diet, and enrichment are often the biggest levers for exotic pet health." },
     ],
@@ -266,10 +266,10 @@ export default function AnimalPage() {
                 Request a {animal.noun} visit
               </Link>
               <a
-                href="tel:+10000000000"
+                href="tel:+12026598830"
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 backdrop-blur-md text-sand-50 rounded-full px-7 py-4 font-semibold transition-colors"
               >
-                <Phone className="h-4 w-4" /> Call (000) 000-0000
+                <Phone className="h-4 w-4" /> Call (202) 659-8830
               </a>
               <Link
                 to="/services"

@@ -23,7 +23,7 @@ export default function PortalLayout() {
               <PawPrint className="h-4 w-4 text-white" />
             </div>
             <div>
-              <div className="font-display font-bold text-clinic-navy text-sm leading-tight">Vet Clinic</div>
+              <div className="font-display font-bold text-clinic-navy text-sm leading-tight">Collins</div>
               <div className="text-[10px] uppercase tracking-widest text-clinic-mist">Client Portal</div>
             </div>
           </Link>

@@ -112,7 +112,7 @@ export default function PortalBook() {
       {/* Pet selector */}
       {pets.length === 0 ? (
         <div className="mt-8 bg-white rounded-2xl border border-sand-300/60 p-6 text-sm text-clinic-mist">
-          We don&rsquo;t have any pets on file for you yet. Please call us at (000) 000-0000 and we&rsquo;ll get you set up.
+          We don&rsquo;t have any pets on file for you yet. Please call us at (202) 659-8830 and we&rsquo;ll get you set up.
         </div>
       ) : (
         <section className="mt-8 bg-white rounded-[1.5rem] border border-sand-300/60 p-6">

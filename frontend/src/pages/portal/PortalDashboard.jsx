@@ -31,7 +31,7 @@ function StatusDot({ date, label }) {
       </span>
       {!isGood && (
         <div className="absolute bottom-full left-0 mb-2 w-64 bg-clinic-navy text-sand-50 text-xs rounded-xl p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl">
-          {date ? "This diagnostic is over a year old." : "No record found."} Regular {label.toLowerCase()} is crucial to preventive care and catching health issues early. Call us at (000) 000-0000 to schedule.
+          {date ? "This diagnostic is over a year old." : "No record found."} Regular {label.toLowerCase()} is crucial to preventive care and catching health issues early. Call us at (202) 659-8830 to schedule.
         </div>
       )}
     </div>

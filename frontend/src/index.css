@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -24,26 +24,26 @@ code {
 @layer base {
   :root {
     /* Site template brand palette. Values are RGB triplets so Tailwind opacity modifiers work. */
-    --sand-50: 253 251 247;
-    --sand-100: 247 242 232;
-    --sand-200: 239 230 211;
-    --sand-300: 229 225 216;
-    --clinic-navy: 26 43 76;
-    --clinic-navy-hover: 38 59 102;
-    --clinic-forest: 44 85 69;
-    --clinic-forest-hover: 58 110 89;
-    --clinic-sage: 232 240 235;
-    --clinic-sage-deep: 212 226 216;
-    --clinic-red: 200 56 46;
-    --clinic-red-hover: 166 44 35;
-    --clinic-red-soft: 249 230 226;
+    --sand-50: 251 247 238;
+    --sand-100: 245 238 223;
+    --sand-200: 232 219 194;
+    --sand-300: 214 199 171;
+    --clinic-navy: 17 17 17;
+    --clinic-navy-hover: 37 37 37;
+    --clinic-forest: 110 85 47;
+    --clinic-forest-hover: 137 105 58;
+    --clinic-sage: 239 229 209;
+    --clinic-sage-deep: 220 203 170;
+    --clinic-red: 169 130 67;
+    --clinic-red-hover: 124 94 48;
+    --clinic-red-soft: 244 235 216;
     --clinic-peach: 251 238 222;
     --clinic-peach-deep: 245 223 196;
     --clinic-cream: 253 247 237;
-    --clinic-amber: 232 180 88;
-    --clinic-amber-soft: 251 232 194;
-    --clinic-ink: 14 27 54;
-    --clinic-mist: 90 107 130;    --background: 38 50% 97%;
+    --clinic-amber: 169 130 67;
+    --clinic-amber-soft: 242 226 195;
+    --clinic-ink: 10 10 10;
+    --clinic-mist: 101 96 88;    --background: 38 50% 97%;
     --foreground: 220 48% 20%;
     --card: 0 0% 100%;
     --card-foreground: 220 48% 20%;
@@ -55,17 +55,17 @@ code {
     --secondary-foreground: 148 32% 25%;
     --muted: 38 20% 95%;
     --muted-foreground: 216 17% 43%;
-    --accent: 4 62% 48%;
+    --accent: 36 43% 46%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
     --border: 38 18% 87%;
     --input: 38 18% 87%;
-    --ring: 148 32% 25%;
+    --ring: 36 43% 46%;
     --radius: 1rem;
-    --chart-1: 148 32% 25%;
-    --chart-2: 220 48% 20%;
-    --chart-3: 15 62% 57%;
+    --chart-1: 36 43% 46%;
+    --chart-2: 0 0% 7%;
+    --chart-3: 36 31% 58%;
     --chart-4: 38 66% 63%;
     --chart-5: 200 50% 45%;
   }
@@ -82,7 +82,7 @@ code {
     --secondary-foreground: 38 50% 97%;
     --muted: 220 30% 20%;
     --muted-foreground: 220 15% 65%;
-    --accent: 4 62% 48%;
+    --accent: 36 43% 46%;
     --accent-foreground: 38 50% 97%;
     --destructive: 0 62% 40%;
     --destructive-foreground: 38 50% 97%;

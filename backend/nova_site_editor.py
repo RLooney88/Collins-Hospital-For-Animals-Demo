@@ -74,7 +74,7 @@ def _settings() -> dict:
         "site_key": _env("EDIT_REQUEST_SITE_KEY"),
         "callback_auth": _env("EDIT_REQUEST_CALLBACK_AUTH"),
         "public_site_url": _env("PUBLIC_SITE_URL"),
-        "client_name": _env("EDIT_REQUEST_CLIENT_NAME") or _env("SITE_NAME") or "Veterinary Practice Name",
+        "client_name": _env("EDIT_REQUEST_CLIENT_NAME") or _env("SITE_NAME") or "Collins Hospital for Animals",
     }
 
 

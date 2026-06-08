@@ -35,7 +35,7 @@ function HealthIndicator({ date, label, icon: Icon }) {
       </div>
       {!isGood && (
         <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 bg-clinic-navy text-sand-50 text-xs rounded-xl p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl">
-          {date ? `Last ${label.toLowerCase()} was over a year ago.` : `No ${label.toLowerCase()} on file.`} Regular {label.toLowerCase()} is crucial to preventive care and your pet's long-term health. Call (000) 000-0000 to schedule.
+          {date ? `Last ${label.toLowerCase()} was over a year ago.` : `No ${label.toLowerCase()} on file.`} Regular {label.toLowerCase()} is crucial to preventive care and your pet's long-term health. Call (202) 659-8830 to schedule.
         </div>
       )}
     </div>

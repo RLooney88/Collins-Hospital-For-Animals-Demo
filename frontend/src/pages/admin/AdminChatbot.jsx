@@ -97,7 +97,7 @@ export default function AdminChatbot() {
                 type="password"
                 className={inputCls}
               />
-              <div className="text-[10px] text-clinic-mist mt-1">Leave empty to use the default Emergent key</div>
+              <div className="text-[10px] text-clinic-mist mt-1">Leave empty to use the deployed OPENAI_API_KEY</div>
             </div>
           </div>
         </div>

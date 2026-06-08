@@ -1,4 +1,4 @@
-﻿# Veterinary Site Template
+# Collins Hospital for Animals Demo
 
 This repository is the reusable source template for veterinary demo sites.
 

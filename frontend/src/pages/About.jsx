@@ -8,10 +8,10 @@ export default function About() {
     <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-12" data-testid="about-page">
       <div className="text-xs uppercase tracking-[0.22em] font-semibold text-clinic-forest">About the clinic</div>
       <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-clinic-navy mt-3 max-w-3xl leading-[1.02]">
-        A calm, thorough, family-owned clinic in Your City.
+        A calm, thorough, family-owned clinic in Washington.
       </h1>
       <p className="mt-6 text-lg text-clinic-mist max-w-2xl leading-relaxed">
-        Dr. Veterinarian Name opened Veterinary Practice Name to practice medicine the way she
+        Dr. Kristen Fischer opened Collins Hospital for Animals to practice medicine the way she
         always believed it should be practiced: unhurried, evidence-based, and deeply connected to
         the families she serves.
       </p>

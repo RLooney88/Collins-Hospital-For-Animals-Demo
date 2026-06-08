@@ -280,13 +280,7 @@ async def _generate_lead_narrative(
     trail: list[dict],
 ) -> str | None:
     """Use the LLM to turn the signal trail + form data into a short, human-readable summary."""
-    try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage
-    except Exception:
-        logger.warning("emergentintegrations not available for lead narrative")
-        return None
-
-    api_key = os.environ.get("EMERGENT_LLM_KEY", "")
+    api_key = os.environ.get("OPENAI_API_KEY", "")
     if not api_key:
         return None
 
@@ -315,7 +309,7 @@ async def _generate_lead_narrative(
         "total_events": len(trail),
     }
 
-    user_prompt = f"""Write a concise 1-2 paragraph narrative summary (not a list) describing this visitor's experience on Veterinary Practice Name's website before submitting the contact form. Write it in third person, present tense, warm but factual. Mention which animal(s) they focused on, what specific concerns or services drew their attention, and the reason they've reached out now. If they chatted with the bot, weave that in naturally. Do not use bullet points or em-dashes.
+    user_prompt = f"""Write a concise 1-2 paragraph narrative summary (not a list) describing this visitor's experience on Collins Hospital for Animals's website before submitting the contact form. Write it in third person, present tense, warm but factual. Mention which animal(s) they focused on, what specific concerns or services drew their attention, and the reason they've reached out now. If they chatted with the bot, weave that in naturally. Do not use bullet points or em-dashes.
 
 Visitor session data:
 {json.dumps(trail_desc, indent=2)}
@@ -329,14 +323,19 @@ Form they just submitted:
 
 Return only the narrative. No preface, no headings."""
 
-    chat = LlmChat(
-        api_key=api_key,
-        session_id=f"lead-summary-{lead.id}",
-        system_message="You produce short, honest, readable summaries of website visitor journeys for a veterinary clinic's front desk team. Never invent details that aren't supported by the data.",
-    ).with_model("openai", "gpt-4o-mini")
-
     try:
-        reply = await chat.send_message(UserMessage(text=user_prompt))
+        from openai import AsyncOpenAI
+        client = AsyncOpenAI(api_key=api_key)
+        completion = await client.chat.completions.create(
+            model=os.environ.get("LEAD_NARRATIVE_MODEL", "gpt-4o-mini"),
+            messages=[
+                {"role": "system", "content": "You produce short, honest, readable summaries of website visitor journeys for a veterinary clinic's front desk team. Never invent details that are not supported by the data."},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.3,
+            max_tokens=300,
+        )
+        reply = completion.choices[0].message.content or ""
         return reply.strip() if reply else None
     except Exception:
         logger.exception("lead narrative LLM call failed")
@@ -865,72 +864,48 @@ async def test_webhook(
 
 
 # ---------- Chatbot ----------
-DEFAULT_SYSTEM_PROMPT = """You are the virtual assistant for Veterinary Practice Name, a family-owned veterinary clinic in Your City, ST. You help visitors learn about the clinic's services, answer common pet care questions, and book appointments directly in chat.
+DEFAULT_SYSTEM_PROMPT = """You are the virtual assistant for Collins Hospital for Animals in Washington, DC. You help visitors learn about the hospital, answer common veterinary care questions, and guide them to call for appointments.
 
 CLINIC INFO:
-- Address: 123 Main Street, Suite 100, Your City, ST 00000
-- Phone: (000) 000-0000
-- Email: hello@example.com
-- Hours: Mon 8am-4pm, Tue Closed, Wed 12pm-7pm, Thu 8am-4pm, Fri 8am-3pm, Sat 9am-1pm, Sun Closed
-- Parking: Free on-site parking
-- Owner: Dr. Veterinarian Name, DVM (15+ years experience)
-- Team: Team Member Name (Clinic Manager), Team Member Name (Vet Assistant), Team Member Name (Vet Assistant), Team Member Name (Client Services)
-- Years serving Your City: 15+
-- Families served: 5,000+
+- Practice: Collins Hospital for Animals
+- Address: 1808 Wisconsin Ave NW, Washington, DC 20007
+- Phone: (202) 659-8830
+- Public email: no public email found on the source site, direct visitors to call or use online forms/contact pages.
+- Website: https://www.collinsanimalhospital.net
+- Demo URL: https://cha.rclintegrated.com
+- Hours by appointment only: Monday 8:00 AM-7:00 PM, Tuesday 8:00 AM-7:00 PM, Wednesday 9:00 AM-3:00 PM, Thursday 8:00 AM-7:00 PM, Friday 8:00 AM-7:00 PM, Saturday closed, Sunday closed.
+- History: Collins Hospital for Animals has provided veterinary care to the District of Columbia community since 1917.
+- Ownership context: source site says Dr. Lynne D. Cabaniss bought the practice in 1987, and as of January 2026 it is owned and operated by Dr. Kristen Fischer.
+- Veterinarians listed on the source site: Dr. Lynne D. Cabaniss, V.M.D.; Dr. Abby Littleton, V.M.D.; Dr. Kristen Fischer, V.M.D.
 
 ANIMALS WE TREAT:
-- Dogs (all life stages: puppy, adult, senior)
-- Cats (all life stages: kitten, adult, senior)
-- Rabbits (wellness, dental, GI, husbandry, spay/neuter)
-- Guinea Pigs (wellness, dental, vitamin C, skin, respiratory)
-- Some small mammals (hamsters, ferrets - call to confirm)
-- For reptiles, birds, or unusual exotics, we refer to a specialist
+- Dogs and cats.
+- Rabbits and guinea pigs, small rodents, birds, and reptiles. Exotic pets are seen by specific veterinarians only, so callers should confirm availability.
 
-CORE SERVICES (by category):
+SERVICES:
+- Full-service wellness and sick-pet exams, urgent/work-in appointments during normal hospital hours when possible, technician appointments for routine services, drop-off services, in-house and outside laboratory testing, digital radiography, surgery, dentistry including rabbit and rodent dentistry, international and domestic health certificates, ISO-compatible microchips, boarding, and daycare.
+- Emergency guidance: Collins has personnel on duty five days a week but does not always have a veterinarian on premises. For life-threatening emergencies, tell visitors to call first; if Collins is not properly staffed they may refer to the closest emergency hospital.
 
-Preventive & Wellness: annual exams, weight trends, baseline screening, preventive care plans, puppy/kitten visits, core and lifestyle-based vaccines (DHPP, rabies, FVRCP, FeLV, RHDV2 for rabbits), parasite prevention (fleas, ticks, heartworm, intestinal), nutrition and weight management, microchipping.
+CLIENT PORTAL: logged-in demo clients can view pet records at /portal/login.
 
-Dental: oral exams, scaling and polishing under anesthesia, digital dental radiographs, extractions, preventive dentistry, resorptive lesion evaluation in cats, rabbit and guinea pig dental (they have continuously growing teeth).
-
-Surgery: spay and neuter, soft tissue surgery, mass removals, wound repair, rabbit spay, dental extractions.
-
-Advanced Care: laser therapy for arthritis and post-op recovery, PRP and regenerative medicine, in-house diagnostics (bloodwork, urinalysis, cytology, digital x-ray).
-
-Urgent / Sick Care: vomiting, diarrhea, not eating, lethargy, limping, ear infections, skin allergies, hot spots, coughing, urinary issues, eye problems, wounds, behavior changes, hiding, overgrooming. We handle most urgent concerns during business hours, and refer to a 24/7 ER for overnight emergencies.
-
-Senior Care: mobility, arthritis support, kidney and thyroid monitoring, cognitive changes, chronic disease management.
-
-SPECIES-SPECIFIC URGENT SIGNALS (tell the owner to call or come in same-day):
-- Dogs: bloated or distended belly, repeated vomiting, suspected toxin, difficulty breathing, sudden lameness, seizures
-- Cats: straining in the litter box (especially male cats), hiding for 24+ hours, not eating, labored breathing
-- Rabbits: not eating for 12+ hours (GI stasis is life-threatening), head tilt, drooling, labored breathing
-- Guinea Pigs: not eating, weight loss, respiratory distress, swollen cheeks
-
-CLIENT PORTAL: logged-in clients can view their pets' vaccination history, bloodwork, dental records, appointment history, and receive reminders. Portal login is at /portal/login.
-
-TONE: Warm, professional, concise, a trusted neighbor who happens to be a vet expert. Never use em-dashes (use commas, colons, hyphens, or periods). Avoid "personalizing for you" language. 2-4 sentences for most replies.
+TONE: Warm, professional, concise, a trusted DC veterinary hospital. Never use em-dashes. Use 2-4 sentences for most replies.
 
 BOOKING FLOW:
-If the visitor wants to book an appointment, schedule a visit, or asks "how do I book", guide them through the booking in-chat. Collect these fields, one or two at a time (never all at once):
-  1. Client's full name
-  2. Phone number
-  3. Email address
-  4. Pet's name
-  5. Pet's breed (or species if mixed/unknown)
-  6. Preferred day and time window (for example "Wednesday afternoon" or "Saturday morning"). Offer 2-3 options from our open hours if they are unsure.
+Appointments are scheduled Monday through Friday by the receptionist team by calling (202) 659-8830. If a visitor wants to book in chat, collect their name, phone, email, pet name/species, reason for visit, and preferred day/time, then explain that Collins will call to confirm. Do not promise a confirmed appointment time.
 
 After you have collected ALL SIX fields and confirmed them back to the visitor, finish your reply with EXACTLY this marker block on its own line at the very end (no code fences, no quotes around it):
 
-<<BOOKING>>{"client_name":"...","client_phone":"...","client_email":"...","pet_name":"...","pet_breed":"...","preferred_time":"...","notes":"brief reason for visit or 'wellness' if unspecified"}<<END>>
+<<BOOKING>>{"client_name":"...","client_phone":"...","client_email":"...","pet_name":"...","pet_breed":"...","preferred_time":"...","notes":"brief reason for visit or wellness if unspecified"}<<END>>
 
-The marker must be valid JSON on a single line. Do not emit the marker until you have all six fields. Before the marker, write a short friendly confirmation sentence (for example "Perfect, I've got {pet_name} booked for {preferred_time}. We'll call {client_phone} to confirm."). Do not mention the marker to the visitor."""
+The marker must be valid JSON on a single line. Do not emit the marker until you have all six fields. Before the marker, write a short friendly confirmation sentence. Do not mention the marker to the visitor."""
 
 DEFAULT_GUARDRAILS = """RULES:
-- Only answer questions related to Veterinary Practice Name, pet care, veterinary medicine, or booking a visit.
-- If someone asks about topics unrelated to pets or veterinary care, politely redirect: "I'm here to help with questions about Vet Clinic and pet care. Is there something about your pet I can help with?"
-- Never provide specific medical diagnoses. For medical concerns, recommend a visit or (for urgent signs) calling (000) 000-0000 right away.
-- Never discuss pricing specifics. Say "we can give you exact pricing over the phone at (000) 000-0000 or at check-in."
-- Do not make up information about the clinic. If unsure, say "I'd recommend calling us at (000) 000-0000 for the most accurate answer."
+- Only answer questions related to Collins Hospital for Animals, pet care, veterinary medicine, or appointment guidance.
+- If someone asks about unrelated topics, politely redirect to pet care or Collins Hospital for Animals.
+- Never provide specific medical diagnoses. For medical concerns, recommend a visit or, for urgent signs, calling (202) 659-8830 right away.
+- Never discuss pricing specifics. Say Collins can provide accurate pricing by phone at (202) 659-8830 or at check-in.
+- Do not make up doctors, services, emails, pricing, or appointment availability.
+- For exotic pets, say they are seen by specific veterinarians only and recommend calling to confirm availability.
 - Keep responses concise, 2-4 sentences for simple questions.
 - Never use em-dashes. Use commas, hyphens, colons, or periods."""
 
@@ -954,20 +929,10 @@ async def _get_chatbot_config(db: AsyncSession) -> ChatbotConfig:
 
 @api.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(payload: ChatRequest, db: AsyncSession = Depends(get_db)):
-    try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage
-    except Exception:
-        logger.warning("emergentintegrations not available for chat endpoint")
-        return ChatResponse(
-            reply="Chat is currently unavailable in this demo. Please call us at (000) 000-0000.",
-            session_token=payload.session_token,
-        )
-
     config = await _get_chatbot_config(db)
     if not config.active:
-        return ChatResponse(reply="Chat is currently unavailable. Please call us at (000) 000-0000.", session_token=payload.session_token)
+        return ChatResponse(reply="Chat is currently unavailable. Please call us at (202) 659-8830.", session_token=payload.session_token)
 
-    # Build full system message
     parts = [config.system_prompt]
     if config.training_context:
         parts.append(f"\nADDITIONAL TRAINING CONTEXT:\n{config.training_context}")
@@ -975,7 +940,6 @@ async def chat_endpoint(payload: ChatRequest, db: AsyncSession = Depends(get_db)
         parts.append(f"\n{config.guardrails}")
     system_msg = "\n".join(parts)
 
-    # Get chat history for this session (last 20 messages)
     hist_res = await db.execute(
         select(ChatMessage)
         .where(ChatMessage.session_token == payload.session_token)
@@ -984,27 +948,27 @@ async def chat_endpoint(payload: ChatRequest, db: AsyncSession = Depends(get_db)
     )
     history = list(reversed(hist_res.scalars().all()))
 
-    api_key = config.api_key_override or os.environ.get("EMERGENT_LLM_KEY", "")
-
-    chat = LlmChat(
-        api_key=api_key,
-        session_id=f"vet-chat-{payload.session_token}",
-        system_message=system_msg,
-    ).with_model(config.provider, config.model)
-
-    # Replay history into the chat
+    messages = [{"role": "system", "content": system_msg}]
     for msg in history:
-        if msg.role == "user":
-            chat.messages.append({"role": "user", "content": msg.content})
-        else:
-            chat.messages.append({"role": "assistant", "content": msg.content})
+        messages.append({"role": msg.role, "content": msg.content})
+    messages.append({"role": "user", "content": payload.message})
 
     try:
-        user_msg = UserMessage(text=payload.message)
-        reply = await chat.send_message(user_msg)
+        from openai import AsyncOpenAI
+        api_key = os.environ.get("OPENAI_API_KEY", "")
+        if not api_key:
+            raise RuntimeError("OPENAI_API_KEY is not configured")
+        client = AsyncOpenAI(api_key=api_key)
+        completion = await client.chat.completions.create(
+            model=os.environ.get("CHATBOT_MODEL", config.model or "gpt-4o-mini"),
+            messages=messages,
+            temperature=0.4,
+            max_tokens=700,
+        )
+        reply = completion.choices[0].message.content or "Please call us at (202) 659-8830 and we'll be happy to help."
     except Exception as exc:
         logger.exception("Chatbot error")
-        reply = "I'm having trouble right now. Please call us at (000) 000-0000 and we'll be happy to help."
+        reply = "I'm having trouble right now. Please call us at (202) 659-8830 and we'll be happy to help."
 
     # --- Detect and persist an in-chat booking ---
     booking_saved = False

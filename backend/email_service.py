@@ -12,7 +12,7 @@ def send_lead_notification(lead: dict) -> bool:
     Returns True if sent, False if skipped or failed (never raises)."""
     api_key = os.environ.get("SENDGRID_API_KEY", "").strip()
     to_email = os.environ.get("LEAD_NOTIFICATION_EMAIL", "").strip()
-    from_email = os.environ.get("SENDGRID_FROM_EMAIL", "no-reply@example-vet-site.com").strip()
+    from_email = os.environ.get("SENDGRID_FROM_EMAIL", "no-reply@cha.rclintegrated.com").strip()
 
     if not api_key or not to_email:
         logger.info("SendGrid not configured -- skipping email for lead %s", lead.get("id"))
