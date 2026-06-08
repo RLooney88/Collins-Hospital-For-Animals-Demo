@@ -17,7 +17,7 @@ from secrets import token_urlsafe
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sqlalchemy import desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -1151,9 +1151,23 @@ app.add_middleware(
 )
 
 # Serve the React build when deployed as a single Railway service.
+# Starlette StaticFiles(html=True) does not reliably fall back to index.html for
+# client-side React routes in this deployment, so serve files explicitly and
+# return index.html for non-API paths.
 FRONTEND_BUILD_DIR = Path(__file__).resolve().parent.parent / "frontend" / "build"
-if FRONTEND_BUILD_DIR.exists():
-    app.mount("/", StaticFiles(directory=str(FRONTEND_BUILD_DIR), html=True), name="frontend")
-else:
-    logger.warning("Frontend build directory not found at %s; API-only mode enabled", FRONTEND_BUILD_DIR)
+
+
+@app.get("/{full_path:path}", include_in_schema=False)
+async def serve_frontend(full_path: str):
+    if full_path.startswith("api/"):
+        raise HTTPException(status_code=404, detail="Not Found")
+    if not FRONTEND_BUILD_DIR.exists():
+        logger.warning("Frontend build directory not found at %s; API-only mode enabled", FRONTEND_BUILD_DIR)
+        raise HTTPException(status_code=404, detail="Frontend build not found")
+
+    requested = (FRONTEND_BUILD_DIR / full_path).resolve() if full_path else FRONTEND_BUILD_DIR / "index.html"
+    build_root = FRONTEND_BUILD_DIR.resolve()
+    if requested.is_file() and str(requested).startswith(str(build_root)):
+        return FileResponse(requested)
+    return FileResponse(FRONTEND_BUILD_DIR / "index.html")
 
