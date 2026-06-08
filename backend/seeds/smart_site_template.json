@@ -67,7 +67,7 @@
           "content": {
             "eyebrow": "Senior Dog Care",
             "headline": "Comfort, mobility, and quality of life.",
-            "subheadline": "Laser therapy, arthritis support, and chronic-condition monitoring for older dogs.",
+            "subheadline": "Arthritis support, pain-management conversations, and chronic-condition monitoring for older dogs.",
             "primary_cta_label": "Senior Wellness Consult",
             "primary_cta_href": "/appointment",
             "secondary_cta_label": "Call (202) 659-8830",
@@ -235,7 +235,7 @@
                 "intent": "dogs",
                 "sub_intent": "treatments",
                 "title": "Specific Treatments",
-                "description": "Dental, surgery, laser, PRP.",
+                "description": "Dental care, surgery, diagnostics, and health certificates.",
                 "image": "/images/animals/hero-svc-dogs.webp"
               }
             ]
@@ -283,7 +283,7 @@
                 "intent": "cats",
                 "sub_intent": "treatments",
                 "title": "Specific Treatments",
-                "description": "Dental, surgery, laser.",
+                "description": "Dental care, surgery, diagnostics, and health certificates.",
                 "image": "/images/animals/hero-svc-dogs.webp"
               }
             ]
@@ -358,15 +358,15 @@
             "icon": "scissors"
           },
           {
-            "title": "Laser Therapy",
+            "title": "Digital Radiography",
             "description": "Non-invasive pain relief and faster recovery.",
-            "href": "/services/laser-therapy",
+            "href": "/services/digital-radiography",
             "icon": "sparkles"
           },
           {
-            "title": "PRP & Regenerative",
-            "description": "Cutting-edge regenerative treatments for joints & healing.",
-            "href": "/services/prp-therapy",
+            "title": "Health Certificates",
+            "description": "Health certificates and travel paperwork guidance.",
+            "href": "/services/health-certificates",
             "icon": "activity"
           }
         ]
@@ -394,9 +394,9 @@
                 "icon": "tooth"
               },
               {
-                "title": "Laser Therapy",
+                "title": "Digital Radiography",
                 "description": "Drug-free pain relief for arthritis and recovery.",
-                "href": "/services/laser-therapy",
+                "href": "/services/digital-radiography",
                 "icon": "sparkles"
               },
               {
@@ -406,9 +406,9 @@
                 "icon": "scissors"
               },
               {
-                "title": "PRP & Regenerative",
-                "description": "Regenerative medicine for joints & healing.",
-                "href": "/services/prp-therapy",
+                "title": "Health Certificates",
+                "description": "Health certificates and travel paperwork guidance.",
+                "href": "/services/health-certificates",
                 "icon": "activity"
               },
               {
@@ -454,9 +454,9 @@
                 "icon": "scissors"
               },
               {
-                "title": "Laser Therapy",
+                "title": "Digital Radiography",
                 "description": "Comfort for aging joints and healing.",
-                "href": "/services/laser-therapy",
+                "href": "/services/digital-radiography",
                 "icon": "sparkles"
               },
               {
@@ -508,15 +508,15 @@
             "heading": "Comfort & mobility for senior pets.",
             "cards": [
               {
-                "title": "Laser Therapy",
+                "title": "Digital Radiography",
                 "description": "Drug-free pain relief for stiff, aging joints.",
-                "href": "/services/laser-therapy",
+                "href": "/services/digital-radiography",
                 "icon": "sparkles"
               },
               {
-                "title": "PRP & Regenerative Medicine",
-                "description": "Cutting-edge regenerative options.",
-                "href": "/services/prp-therapy",
+                "title": "Health Certificates",
+                "description": "Health certificates and travel paperwork guidance.",
+                "href": "/services/health-certificates",
                 "icon": "activity"
               },
               {
@@ -534,56 +534,33 @@
       "slug": "home_proof",
       "name": "Proof / Testimonials",
       "page": "home",
-      "description": "Testimonials emphasised by intent.",
+      "description": "Source-backed proof statements by intent; no fake reviews.",
       "default_content": {
-        "heading": "Families across Washington trust us with their pets.",
+        "heading": "A Georgetown veterinary landmark since 1917.",
         "testimonials": [
           {
-            "quote": "the veterinarian's love, knowledge and respect for animals is unparalleled. She does not waste your money on unnecessary tests yet does everything she can to find the problem and get your pet healthy.",
-            "author": "Long-time client",
-            "tag": "Wellness"
+            "quote": "Collins Hospital for Animals has served Washington, DC pets since 1917 with medicine, surgery, dentistry, diagnostics, boarding, and client education.",
+            "author": "Practice history",
+            "tag": "Since 1917"
           },
           {
-            "quote": "If I could give Collins Hospital for Animals more stars, I would! From their receptionists to techs to doctors, they are all kind, attentive, understanding and knowledgeable.",
-            "author": "First-time dog owner",
-            "tag": "New Puppy"
+            "quote": "The practice describes itself as a full-service small animal and exotic veterinary hospital in Georgetown.",
+            "author": "Practice website",
+            "tag": "Full-service care"
           },
           {
-            "quote": "The team performed orthopedic surgery on my beagle. She is pretty much back to her normal self. Everyone is very friendly and professional.",
-            "author": "Beagle mom",
-            "tag": "Surgery"
+            "quote": "Appointments are scheduled by phone, with select exotic pets seen by specific veterinarians only.",
+            "author": "Practice website",
+            "tag": "Appointment guidance"
           }
         ],
-        "eyebrow": "A DC veterinary landmark",
-        "headline": "Trusted veterinary care since 1917.",
-        "quote": "Collins Hospital for Animals provides high quality medicine and surgery in a caring and compassionate environment for pets and their people.",
-        "author": "Collins Hospital for Animals",
+        "eyebrow": "Source-backed proof",
+        "headline": "Longstanding care in Washington, DC.",
+        "quote": "Collins Hospital for Animals provides medicine, surgery, dentistry, diagnostics, boarding, and thoughtful care for pets and their people.",
+        "author": "Practice website",
         "source": "Practice website"
       },
-      "switches": [
-        {
-          "name": "Surgery emphasis",
-          "rule": {
-            "sub_intent": "treatments"
-          },
-          "priority": 100,
-          "content": {
-            "heading": "Recovery stories from our families.",
-            "testimonials": [
-              {
-                "quote": "The team performed orthopedic surgery on my beagle. She is pretty much back to her normal self.",
-                "author": "Beagle mom",
-                "tag": "Surgery"
-              },
-              {
-                "quote": "The care team did the follow-up laser treatment. Everyone is very friendly and professional.",
-                "author": "Post-op client",
-                "tag": "Laser Therapy"
-              }
-            ]
-          }
-        }
-      ]
+      "switches": []
     },
     {
       "slug": "home_faq",
@@ -607,7 +584,7 @@
           },
           {
             "q": "My senior dog is slowing down, can you help with arthritis or pain?",
-            "a": "Yes, we combine laser therapy, joint support, multimodal pain management, and PRP/regenerative medicine to keep older dogs comfortable and mobile. Senior consults include a tailored quality-of-life plan.",
+            "a": "Yes, we combine digital radiography, joint support, multimodal pain management, and health certificate and diagnostic planning to keep older dogs comfortable and mobile. Senior consults include a tailored quality-of-life plan.",
             "intent": "dogs",
             "sub_intent": "senior"
           },
@@ -635,8 +612,8 @@
             "sub_intent": "wellness"
           },
           {
-            "q": "Do you offer laser therapy or PRP / regenerative medicine?",
-            "a": "Yes, Class IV laser therapy for pain, inflammation, and healing, and Platelet-Rich Plasma (PRP) for joints, soft-tissue injuries, and chronic pain where medications aren't enough.",
+            "q": "Do you offer digital radiography or health certificates or diagnostic imaging?",
+            "a": "Yes, Class IV digital radiography for pain, inflammation, and healing, and digital radiography, lab testing, and referral guidance when advanced specialty care is needed.",
             "sub_intent": "treatments"
           },
           {

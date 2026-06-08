@@ -66,7 +66,7 @@ const ANIMALS = {
     life_stages: [
       { name: "Puppy", age: "6 wks – 1 yr", focus: "Vaccine series, deworming, nutrition counseling, spay/neuter planning, training guidance.", icon: "paw", image: "/images/animals/dog-puppy.webp" },
       { name: "Adult", age: "1 – 7 yrs", focus: "Annual wellness, dental care, parasite prevention, weight management, lifestyle vaccines.", icon: "shield", image: "/images/animals/dog-adult.webp", objectPosition: "center top" },
-      { name: "Senior", age: "7 yrs +", focus: "Twice-yearly exams, bloodwork, joint support, laser therapy, PRP, quality-of-life planning.", icon: "heart", image: "/images/animals/dog-senior.webp" },
+      { name: "Senior", age: "7 yrs +", focus: "Twice-yearly exams, bloodwork, joint support, digital radiography, health certificates, quality-of-life planning.", icon: "heart", image: "/images/animals/dog-senior.webp" },
     ],
     conditions: [
       { name: "Dental disease", body: "Plaque, gingivitis, and loose teeth, often silent until severe.", image: "/images/animals/dog-dental.webp" },
@@ -90,9 +90,9 @@ const ANIMALS = {
       { q: "When should I spay/neuter my dog?", a: "It depends on breed and size, small breeds often earlier, large and giant breeds later to support joint development. We'll recommend the right timing at your puppy visit." },
       { q: "What signs mean I should call you today?", a: "Not eating for 24 hours, repeated vomiting, difficulty breathing, suspected toxin ingestion, sudden lameness, seizures, or any bloated belly. Call (202) 659-8830 first so the team can guide you appropriately." },
       { q: "Do you do dental work for dogs?", a: "Yes, full anesthetic cleanings with dental X-rays and extractions as needed. We screen at every wellness visit." },
-      { q: "Can you help my senior dog stay comfortable?", a: "Absolutely. Laser therapy, joint support, weight management, multimodal pain control, and PRP/regenerative options, we combine them for real quality of life." },
+      { q: "Can you help my senior dog stay comfortable?", a: "Absolutely. Digital radiography, joint support, weight management, multimodal pain control, and diagnostic and referral options, we combine them for real quality of life." },
     ],
-    services: ["wellness-exams", "vaccinations", "dental-care", "surgery", "parasite-prevention", "laser-therapy", "prp-therapy", "microchipping", "senior-care", "emergency-care"],
+    services: ["wellness-exams", "vaccinations", "dental-care", "surgery", "parasite-prevention", "digital-radiography", "health-certificates", "microchipping", "senior-care", "emergency-care"],
   },
   cats: {
     slug: "cats",
@@ -136,7 +136,7 @@ const ANIMALS = {
       { q: "What counts as a feline emergency?", a: "Male cats straining to urinate, difficulty breathing, sudden collapse, seizures, suspected toxin exposure, prolonged not eating or hiding. Call us right away." },
       { q: "Do you do dental work for cats?", a: "Yes. Feline dental disease is incredibly common and painful, we screen at every wellness and offer full cleanings with dental X-rays." },
     ],
-    services: ["wellness-exams", "vaccinations", "dental-care", "senior-care", "surgery", "laser-therapy", "microchipping", "parasite-prevention", "emergency-care"],
+    services: ["wellness-exams", "vaccinations", "dental-care", "senior-care", "surgery", "digital-radiography", "microchipping", "parasite-prevention", "emergency-care"],
   },
   critters: {
     slug: "critters",

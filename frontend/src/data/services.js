@@ -69,7 +69,7 @@ const DOG_PREVENTIVE = [
     title: "Senior Dog Care",
     summary: "Mobility support, arthritis monitoring, cognition changes, senior bloodwork, quality-of-life support.",
     image: img("svc-dog-senior"),
-    detail: "Senior dogs (typically 7+) benefit from twice-yearly exams and bloodwork to catch age-related conditions early. We monitor for arthritis, kidney disease, liver changes, thyroid issues, and cognitive decline. Laser therapy, joint supplements, weight management, and pain control are all part of our toolkit for keeping seniors comfortable.",
+    detail: "Senior dogs (typically 7+) benefit from twice-yearly exams and bloodwork to catch age-related conditions early. We monitor for arthritis, kidney disease, liver changes, thyroid issues, and cognitive decline. Digital radiography, joint supplements, weight management, and pain control are all part of our toolkit for keeping seniors comfortable.",
   },
 ];
 
