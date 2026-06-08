@@ -269,7 +269,7 @@ SUB_INTENT_LABELS = {
     "wellness": "Routine wellness",
     "health_concerns": "Illness or injury concern",
     "senior": "Senior pet care",
-    "treatments": "Specific treatments (dental / surgery / laser)",
+    "treatments": "Specific treatments (dental / surgery / diagnostics)",
     "husbandry": "Habitat and diet guidance",
 }
 
@@ -1012,7 +1012,7 @@ async def chat_endpoint(payload: ChatRequest, db: AsyncSession = Depends(get_db)
     detected_sub = None
 
     # Parent intent detection
-    dog_kw = ("dog", "puppy", "puppies", "canine", "pup ", "pups", "golden retriever", "labrador", "beagle", "terrier", "bulldog", "shepherd")
+    dog_kw = ("dog", "puppy", "puppies", "canine", "pup ", "pups", "golden retriever", "labrador", "terrier", "bulldog", "shepherd")
     cat_kw = ("cat", "kitten", "kittens", "feline", "kitty", "kitties", "tabby")
     critter_kw = ("rabbit", "bunny", "guinea pig", "hamster", "exotic", "small mammal", "reptile", "bird", "ferret")
 
@@ -1033,7 +1033,7 @@ async def chat_endpoint(payload: ChatRequest, db: AsyncSession = Depends(get_db)
         "new_kitten": ("new kitten", "kitten visit", "first kitten", "just got a kitten", "adopted a kitten", "kitten vaccine"),
         "senior": ("senior", "older dog", "older cat", "aging", "arthritis", "joint", "mobility", "stiff"),
         "health_concerns": ("sick", "emergency", "vomiting", "diarrhea", "not eating", "lethargic", "bleeding", "pain", "limping", "swelling", "lump", "breathing", "cough"),
-        "treatments": ("dental", "surgery", "spay", "neuter", "laser", "prp", "cleaning", "extraction", "procedure"),
+        "treatments": ("dental", "surgery", "spay", "neuter", "radiography", "diagnostic", "cleaning", "extraction", "procedure"),
         "wellness": ("wellness", "checkup", "check-up", "vaccine", "annual", "exam", "prevention", "parasite", "flea", "tick", "heartworm"),
     }
     for sub_key, keywords in sub_kw_map.items():
